@@ -17,7 +17,7 @@ class _DiceRollerState extends State<DiceRoller> {
     // Generate a random number between 1 and 6
     setState(() {
       diceNumber = 1 + randomizer.nextInt(6);
-      // print("The dice number is $diceNumber");
+      print("The dice number is $diceNumber");
     });
   }
 
