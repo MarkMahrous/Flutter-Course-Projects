@@ -18,28 +18,25 @@ class _QuestionScreenState extends State<QuestionScreen> {
   List<bool> results = [];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          myQuestions[questionIndex].question,
-          style: const TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
+    return Container(
+      margin: const EdgeInsets.all(50),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            myQuestions[questionIndex].question,
+            style: const TextStyle(
+              fontSize: 25,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
           ),
-        ),
-        const SizedBox(height: 20),
-        ...myQuestions[questionIndex]
-            .answers
-            .asMap()
-            .entries
-            .map((answer) => AnswerButton(answer.value, () {
-                  if (answer.key == myQuestions[questionIndex].correctAnswer) {
-                    results.add(true);
-                  } else {
-                    results.add(false);
-                  }
+          const SizedBox(height: 20),
+          ...myQuestions[questionIndex].answers.map((answer) => Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                child: AnswerButton(answer, () {
                   if (questionIndex == myQuestions.length - 1) {
                     widget.finishQuiz();
                   } else {
@@ -47,9 +44,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       questionIndex++;
                     });
                   }
-                }))
-            .toList(),
-      ],
+                }),
+              )),
+        ],
+      ),
     );
   }
 }
