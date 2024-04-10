@@ -4,9 +4,10 @@ import 'package:quiz_app/models/questions.dart';
 import 'package:quiz_app/models/quiz_question.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen(this.finishQuiz, {super.key});
+  const QuestionScreen(this.finishQuiz, this.answerQuestion, {super.key});
 
   final void Function() finishQuiz;
+  final void Function(String) answerQuestion;
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
@@ -27,25 +28,35 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Text(
             myQuestions[questionIndex].question,
             style: const TextStyle(
-              fontSize: 25,
+              fontSize: 24,
               color: Colors.white,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
-          ...myQuestions[questionIndex].answers.map((answer) => Container(
-                margin: const EdgeInsets.only(bottom: 5),
-                child: AnswerButton(answer, () {
-                  if (questionIndex == myQuestions.length - 1) {
-                    widget.finishQuiz();
-                  } else {
-                    setState(() {
-                      questionIndex++;
-                    });
-                  }
-                }),
-              )),
+          ...myQuestions[questionIndex]
+              .getShuffledAnswers()
+              .map((answer) => Container(
+                    margin: const EdgeInsets.only(bottom: 5),
+                    child: AnswerButton(answer, () {
+                      if (answer == myQuestions[questionIndex].answers[0]) {
+                        results.add(true);
+                        print(results);
+                      } else {
+                        results.add(false);
+                        print(results);
+                      }
+                      widget.answerQuestion(answer);
+                      if (questionIndex == myQuestions.length - 1) {
+                        widget.finishQuiz();
+                      } else {
+                        setState(() {
+                          questionIndex++;
+                        });
+                      }
+                    }),
+                  )),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/questions.dart';
 import 'package:quiz_app/screens/question_screen.dart';
 import 'package:quiz_app/screens/result_screen.dart';
 import 'package:quiz_app/screens/start_screen.dart';
@@ -13,12 +14,19 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  final List<String> selectedAnswers = [];
+  final myQuestions = questions;
   var activeWidget = "start";
+
+  void answerQuestion(String answer) {
+    selectedAnswers.add(answer);
+  }
 
   void startQuiz() {
     setState(() {
       activeWidget = "question";
     });
+    selectedAnswers.clear();
   }
 
   void finishQuiz() {
@@ -43,8 +51,8 @@ class _QuizState extends State<Quiz> {
             child: activeWidget == "start"
                 ? StartScreen(startQuiz)
                 : activeWidget == "question"
-                    ? QuestionScreen(finishQuiz)
-                    : ResultScreen(startQuiz),
+                    ? QuestionScreen(finishQuiz, answerQuestion)
+                    : ResultScreen(startQuiz, selectedAnswers, myQuestions),
           ),
         ),
       ),
