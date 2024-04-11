@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/custom_widgets/answer_button.dart';
 import 'package:quiz_app/models/questions.dart';
 import 'package:quiz_app/models/quiz_question.dart';
 
@@ -16,11 +16,10 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   List<Question> myQuestions = questions;
   int questionIndex = 0;
-  List<bool> results = [];
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(50),
+      margin: const EdgeInsets.all(30),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,13 +39,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
               .map((answer) => Container(
                     margin: const EdgeInsets.only(bottom: 5),
                     child: AnswerButton(answer, () {
-                      if (answer == myQuestions[questionIndex].answers[0]) {
-                        results.add(true);
-                        print(results);
-                      } else {
-                        results.add(false);
-                        print(results);
-                      }
                       widget.answerQuestion(answer);
                       if (questionIndex == myQuestions.length - 1) {
                         widget.finishQuiz();
@@ -56,7 +48,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         });
                       }
                     }),
-                  )),
+                  ))
+              .toList(),
         ],
       ),
     );

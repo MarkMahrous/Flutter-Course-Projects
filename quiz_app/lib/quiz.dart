@@ -52,7 +52,7 @@ class _QuizState extends State<Quiz> {
                 ? StartScreen(startQuiz)
                 : activeWidget == "question"
                     ? QuestionScreen(finishQuiz, answerQuestion)
-                    : ResultScreen(startQuiz, selectedAnswers, myQuestions),
+                    : ResultScreen(startQuiz, selectedAnswers),
           ),
         ),
       ),

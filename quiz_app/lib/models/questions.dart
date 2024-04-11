@@ -17,4 +17,12 @@ const List<Question> questions = [
     question: "What is the capital of England?",
     answers: ["London", "Berlin", "Paris", "Madrid"],
   ),
+  Question(
+    question: "What is the capital of Italy?",
+    answers: ["Rome", "Berlin", "Paris", "Madrid"],
+  ),
+  Question(
+    question: "What is the capital of Portugal?",
+    answers: ["Lisbon", "Berlin", "Paris", "Madrid"],
+  ),
 ];
