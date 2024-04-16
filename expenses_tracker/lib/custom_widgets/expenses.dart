@@ -1,3 +1,4 @@
+import 'package:expenses_tracker/custom_widgets/chart/chart.dart';
 import 'package:expenses_tracker/custom_widgets/expenses_list/expenses_list.dart';
 import 'package:expenses_tracker/custom_widgets/new_expense.dart';
 import 'package:expenses_tracker/models/expense.dart';
@@ -84,7 +85,7 @@ class _ExpensesState extends State<Expenses> {
             const SizedBox(
               height: 4,
             ),
-            const Text('chart'),
+            Chart(expenses: _registeredExpenses),
             Expanded(
               child: _registeredExpenses.isEmpty
                   ? const Center(
