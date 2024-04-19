@@ -61,6 +61,7 @@ class _ExpensesState extends State<Expenses> {
     // context is the build context of _ExpensesState and includes metadata about it.
     // but ctx is the build context of the showModalBottomSheet and includes metadata about it.
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(addNewExpense: _addNewExpense),
@@ -69,6 +70,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isLandscape = width > 600;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expenses Tracker'),
@@ -80,21 +83,33 @@ class _ExpensesState extends State<Expenses> {
         ],
       ),
       body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 4,
-            ),
-            Chart(expenses: _registeredExpenses),
-            Expanded(
-              child: _registeredExpenses.isEmpty
-                  ? const Center(
-                      child:
-                          Text('There is no Expenses yet, Start adding some.'))
-                  : ExpensesList(_registeredExpenses, _removeExpense),
-            ),
-          ],
-        ),
+        child: !isLandscape
+            ? Column(
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(
+                    child: _registeredExpenses.isEmpty
+                        ? const Center(
+                            child: Text(
+                                'There is no Expenses yet, Start adding some.'))
+                        : ExpensesList(_registeredExpenses, _removeExpense),
+                  ),
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    child: Chart(expenses: _registeredExpenses),
+                  ),
+                  Expanded(
+                    child: _registeredExpenses.isEmpty
+                        ? const Center(
+                            child: Text(
+                                'There is no Expenses yet, Start adding some.'))
+                        : ExpensesList(_registeredExpenses, _removeExpense),
+                  ),
+                ],
+              ),
       ),
     );
   }

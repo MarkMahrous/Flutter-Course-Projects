@@ -1,8 +1,15 @@
-import 'package:expenses_tracker/custom_widgets/expenses.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+
+import 'package:expenses_tracker/custom_widgets/expenses.dart';
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]).then((fn) {
   runApp(const MyApp());
+  // });
 }
 
 var kColorScheme = ColorScheme.fromSeed(

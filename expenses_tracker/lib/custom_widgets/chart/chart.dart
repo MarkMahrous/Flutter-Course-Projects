@@ -16,16 +16,16 @@ class Chart extends StatelessWidget {
     ];
   }
 
-  double get maxTotalExpense {
-    double maxTotalExpense = 0;
+  double get maxTotalAmount {
+    double maxTotalAmount = 0;
 
     for (final bucket in buckets) {
-      if (bucket.totalAmount > maxTotalExpense) {
-        maxTotalExpense = bucket.totalAmount;
+      if (bucket.totalAmount > maxTotalAmount) {
+        maxTotalAmount = bucket.totalAmount;
       }
     }
 
-    return maxTotalExpense;
+    return maxTotalAmount;
   }
 
   @override
@@ -61,7 +61,7 @@ class Chart extends StatelessWidget {
                   ChartBar(
                     fill: bucket.totalAmount == 0
                         ? 0
-                        : bucket.totalAmount / maxTotalExpense,
+                        : bucket.totalAmount / maxTotalAmount,
                   )
               ],
             ),
