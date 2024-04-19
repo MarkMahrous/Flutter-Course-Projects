@@ -1,8 +1,8 @@
 import 'dart:io';
-
-import 'package:expenses_tracker/models/expense.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:expenses_tracker/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({required this.addNewExpense, super.key});
