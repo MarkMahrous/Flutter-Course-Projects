@@ -1,0 +1,29 @@
+The code we write in the next lecture should look like this:
+
+PopScope(
+  canPop: false,
+  onPopInvoked: (bool didPop) {
+    if(didPop) return;
+    Navigator.of(context).pop({
+      Filter.glutenFree: _glutenFreeFilterSet,
+      Filter.lactoseFree: _lactoseFreeFilterSet,
+      Filter.vegetarian: _vegetarianFilterSet,
+      Filter.vegan: _veganFilterSet,
+    });
+  },
+  child: Column(...) // same code as shown in the next lecture
+),
+NOT like this:
+
+WillPopScope(
+  onWillPop: () async {
+    Navigator.of(context).pop({
+      Filter.glutenFree: _glutenFreeFilterSet,
+      Filter.lactoseFree: _lactoseFreeFilterSet,
+      Filter.vegetarian: _vegetarianFilterSet,
+      Filter.vegan: _veganFilterSet,
+    });
+    return false;
+  },
+  child: Column(...) // same code as before
+),
